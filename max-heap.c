@@ -3,13 +3,14 @@
 #include <limits.h>
 #include <string.h>
 
+#define HEAPSIZE 100
 #define left(i) ((i)<<1)
 #define right(i) (((i)<<1)+1)
 #define parent(i) ((i)>>1)
 
 typedef struct {
 	int size;
-	int element[100];
+	int element[HEAPSIZE];
 } Heap;
 
 //Swaps the values of two ints a and b
@@ -55,7 +56,10 @@ int extractMax(Heap * A) {
 
 //Increase the key of the ith element in heap A to be k
 void increaseKey(Heap * A, int i, int k) {
-	if(A->element[i] >= k) return;
+	if(A->element[i] >= k) {
+		printf("error: %d is less than the key of %d\n", k, i);
+		return;
+	}
 	int position = i;
 	while(position != 0 && A->element[parent(position)] < k) {
 		A->element[position] = A->element[parent(position)];
@@ -66,7 +70,7 @@ void increaseKey(Heap * A, int i, int k) {
 
 //Inserts the value i into the heap A
 void insert(Heap * A, int i) {
-	if(A->size > 99) printf("error: heap full\n");
+	if(A->size == HEAPSIZE) printf("error: heap full\n");
 	A->element[A->size] = INT_MIN;
 	increaseKey(A, A->size, i);
 	++A->size;
@@ -84,7 +88,7 @@ void print(Heap * A) {
 
 //Makes a heap out of an unsorted array a of n elements 
 void buildHeap(Heap * A, int * a, int n) {
-	if(n > 100) {
+	if(n > HEAPSIZE) {
 		printf("error: too many elements\n");
 		return;
 	}
