@@ -99,7 +99,7 @@ void buildHeap(Heap * A, int * a, int n) {
 	memcpy(A->element, a, nbytes);
 	A->size = n;
 	int i = 0;
-	for(i = A->size/2; i > -1 ; i--) {
+	for(i = A->size/2; i >= 0; i--) {
 		makeHeap(A, i);
 	}
 }
