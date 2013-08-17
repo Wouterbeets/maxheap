@@ -45,7 +45,7 @@ void makeHeap(Heap * A, int i) {
 int extractMax(Heap * A) {
 	if(!A->size) {
 		puts("error: heap empty");
-		return 0;	//Ensure that the heap isn't empty
+		return 0;	
 	}
 	int max = A->element[0];
 	swap(&A->element[0], &A->element[A->size]);
