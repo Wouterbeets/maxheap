@@ -70,7 +70,10 @@ void increaseKey(Heap * A, int i, int k) {
 
 //Inserts the value i into the heap A
 void insert(Heap * A, int i) {
-	if(A->size == HEAPSIZE) printf("error: heap full\n");
+	if(A->size >= HEAPSIZE) {
+		printf("error: heap full\n");
+		return;
+	}
 	A->element[A->size] = INT_MIN;
 	increaseKey(A, A->size, i);
 	++A->size;
@@ -94,6 +97,7 @@ void buildHeap(Heap * A, int * a, int n) {
 	}
 	if(A->size) {
 		printf("error: heap not empty\n");
+		return;
 	}
 	int nbytes = n * sizeof(int);
 	memcpy(A->element, a, nbytes);
